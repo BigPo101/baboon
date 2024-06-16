@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 2em auto;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h2 {
+            margin-top: 0;
+        }
+        .cart-items {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+        .cart-items li {
+            padding: 1em;
+            border-bottom: 1px solid #ddd;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Shopping Cart</h1>
+    </header>
+
+    <div class="container">
+        <h2>Your Cart Items</h2>
+        <ul class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 T-Shirt Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Retrieve cart items from localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
+        // Select the cartItems ul element
+        const cartList = document.getElementById('cartItems');
+
+        // Check if cartItems exist in localStorage and render them
+        if (cartItems && cartItems.length > 0) {
+            cartItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.productName} - Size: ${item.size}, Color: ${item.color}`;
+                cartList.appendChild(listItem);
+            });
+        } else {
+            // If no items in cart, display a message
+            const listItem = document.createElement('li');
+            listItem.textContent = 'Your cart is empty.';
+            cartList.appendChild(listItem);
+        }
+    </script>
+
+</body>
+</html>

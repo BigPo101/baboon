@@ -3,40 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customize Classic T-Shirt</title>
+    <title>Classic T-Shirt</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            position: relative; /* Added for positioning */
         }
         .container {
             width: 80%;
             margin: 0 auto;
+            padding: 2em 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent black */
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Adjusted for button positioning */
+            position: fixed; /* Fixed position for header */
+            width: 100%; /* Full width */
+            top: 0; /* Fixed to the top */
+            z-index: 1000; /* Ensure header is on top of other content */
         }
-        .tshirt {
+        header img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .cart-button {
+            padding: 0.5em 1em;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 1em; /* Added margin for spacing */
+        }
+        .cart-button:hover {
+            background-color: #0056b3;
+        }
+        .tshirt-details {
             background-color: #fff;
-            margin: 1em 0;
             padding: 1em;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 5em; /* Adjusted to account for fixed header */
         }
-        .tshirt img {
-            max-width: 100%;
+        .images-container {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-bottom: 1em;
         }
-        .tshirt h2 {
-            margin: 0;
-            padding-bottom: 0.5em;
+        .images-container img {
+            width: 100%;
+            max-width: 250px; /* Adjust this value to control the size of the images */
+            height: auto;
+            object-fit: contain;
         }
-        .tshirt select {
+        .tshirt-details h2 {
             margin: 0.5em 0;
+        }
+        .options {
+            margin: 1em 0;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .options select {
+            padding: 0.5em;
+            margin-bottom: 1em;
+            width: 100%;
+            max-width: 300px;
+        }
+        .options button {
+            padding: 0.5em 1em;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .options button:hover {
+            background-color: #0056b3;
         }
         footer {
             background-color: #333;
@@ -52,33 +113,69 @@
 <body>
 
     <header>
-        <h1>Customize Your Classic T-Shirt</h1>
+        <a href="cart.html" class="cart-button">Cart</a>
+        <img src="logo.png" alt="Logo">
+        <h1>Customize Classic T-Shirt</h1>
     </header>
 
     <div class="container">
-        <div class="tshirt">
+
+        <div class="tshirt-details">
             <h2>Classic T-Shirt</h2>
-            <img src="classic-tshirt.jpg" alt="Classic T-Shirt">
-            <p>Choose your size:</p>
-            <select>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-                <option value="xlarge">X-Large</option>
-            </select>
-            <p>Choose your color:</p>
-            <select>
-                <option value="white">White</option>
-                <option value="black">Black</option>
-                <option value="red">Red</option>
-                <option value="blue">Blue</option>
-            </select>
+            <div class="images-container">
+                <img src="baboonsimple-front.pdf" alt="Classic T-Shirt Front">
+                <img src="baboonsimple-back.pdf" alt="Classic T-Shirt Back">
+            </div>
+            <div class="options">
+                <label for="size">Choose your size:</label>
+                <select id="size" name="size">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="xl">XL</option>
+                </select>
+                <label for="color">Choose your color:</label>
+                <select id="color" name="color">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                </select>
+                <button onclick="addToCart('Classic T-Shirt')">Add to Cart</button>
+            </div>
         </div>
+
     </div>
 
     <footer>
         <p>&copy; 2024 T-Shirt Store. All rights reserved.</p>
     </footer>
+
+    <script>
+        function addToCart(productName) {
+            const size = document.getElementById('size').value;
+            const color = document.getElementById('color').value;
+            
+            // Create an object for the cart item
+            const item = {
+                productName: productName,
+                size: size,
+                color: color
+            };
+
+            // Get existing cart items from localStorage or initialize an empty array
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Add the new item to the cartItems array
+            cartItems.push(item);
+
+            // Store the updated cartItems array in localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+            // Redirect to the cart page
+            window.location.href = 'cart.html';
+        }
+    </script>
 
 </body>
 </html>
