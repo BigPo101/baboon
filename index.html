@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-Shirt Store</title>
+    <title>baboon | Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,10 +19,18 @@
             justify-content: center;
         }
         header {
-            background-color: #333;
+            background-color: rgb(0, 132, 255); /* Semi-transparent black */
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        header img {
+            width: 400px; /* Adjust this value to make the logo larger */
+            height: auto;
+            margin-right: 10px;
         }
         .tshirt {
             background-color: #fff;
@@ -39,6 +47,11 @@
             width: 100%;
             height: auto;
             transition: opacity 0.3s ease;
+        }
+        .tshirt img.default, .tshirt img.hover {
+            width: 100%;
+            max-height: 300px; /* Set a maximum height to ensure uniformity without cutting off */
+            object-fit: contain; /* Ensures the entire image is visible without distortion */
         }
         .tshirt h2 {
             margin: 0;
@@ -83,39 +96,40 @@
 <body>
 
     <header>
-        <h1>Welcome to the T-Shirt Store</h1>
+        <img src="logo.png" alt="Logo">
     </header>
 
     <div class="container">
 
         <div class="tshirt">
-            <h2>Classic T-Shirt</h2>
+            <h2>Classic</h2>
+            <a href="vneck.html">
+                <img src="baboonfull-front.pdf" alt="V-Neck T-Shirt" class="default">
+                <img src="baboonfull-back.pdf" alt="V-Neck T-Shirt Hover" class="hover">
+            </a>
+        </div>
+
+        <div class="tshirt">
+            <h2>Simple Classic</h2>
             <a href="classic.html">
                 <img src="baboonsimple-front.pdf" alt="Classic T-Shirt" class="default">
                 <img src="baboonsimple-back.pdf" alt="Classic T-Shirt Hover" class="hover">
             </a>
         </div>
 
-        <div class="tshirt">
-            <h2>V-Neck T-Shirt</h2>
-            <a href="vneck.html">
-                <img src="baboonface-front.pdf" alt="V-Neck T-Shirt" class="default">
-                <img src="baboonface-back.pdf" alt="V-Neck T-Shirt Hover" class="hover">
-            </a>
-        </div>
 
         <div class="tshirt">
-            <h2>Long Sleeve T-Shirt</h2>
+            <h2>Baboon Face</h2>
             <a href="longsleeve.html">
-                <img src="baboonfull-front.pdf" alt="Long Sleeve T-Shirt" class="default">
-                <img src="baboonfull-back.pdf" alt="Long Sleeve T-Shirt Hover" class="hover">
+                <img src="baboonface-front.pdf" alt="Long Sleeve T-Shirt" class="default">
+                <img src="baboonface-back.pdf" alt="Long Sleeve T-Shirt Hover" class="hover">
             </a>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2024 T-Shirt Store. All rights reserved.</p>
+        <p>&copy; 2024 baboon. All rights reserved.</p>
     </footer>
 
 </body>
