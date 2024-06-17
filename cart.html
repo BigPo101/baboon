@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <title>Cart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,24 +13,70 @@
         }
         .container {
             width: 80%;
-            margin: 2em auto;
+            margin: 0 auto;
+            padding: 7em 0 2em 0; /* Adjusted padding to account for the fixed header */
+        }
+        header {
+            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent black */
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed; /* Fixed position for header */
+            width: 100%; /* Full width */
+            top: 0; /* Fixed to the top */
+            z-index: 1000; /* Ensure header is on top of other content */
+        }
+        header img {
+            width: 100px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .cart-icon {
+            position: absolute; /* Positioned absolute for top-right alignment */
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .cart-item {
             background-color: #fff;
             padding: 1em;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            margin-bottom: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .container h2 {
-            margin-top: 0;
+        .cart-item h2 {
+            margin: 0;
         }
-        .cart-items {
-            list-style-type: none;
-            padding: 0;
-            text-align: left;
+        .cart-item button {
+            padding: 0.5em 1em;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .cart-items li {
-            padding: 1em;
-            border-bottom: 1px solid #ddd;
+        .cart-item button:hover {
+            background-color: #c9302c;
+        }
+        .clear-cart {
+            padding: 0.5em 1em;
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 1em;
+        }
+        .clear-cart:hover {
+            background-color: #c9302c;
         }
         footer {
             background-color: #333;
@@ -46,14 +92,16 @@
 <body>
 
     <header>
-        <h1>Shopping Cart</h1>
+        <img src="logo.png" alt="Logo">
+        <h1>Your Cart</h1>
+        <a href="index.html"><img src="cart-icon.png" alt="Cart" class="cart-icon"></a>
     </header>
 
     <div class="container">
-        <h2>Your Cart Items</h2>
-        <ul class="cart-items" id="cartItems">
-            <!-- Cart items will be dynamically added here -->
-        </ul>
+        <button class="clear-cart" onclick="clearCart()">Clear Cart</button>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically populated here -->
+        </div>
     </div>
 
     <footer>
@@ -61,25 +109,38 @@
     </footer>
 
     <script>
-        // Retrieve cart items from localStorage
-        const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-
-        // Select the cartItems ul element
-        const cartList = document.getElementById('cartItems');
-
-        // Check if cartItems exist in localStorage and render them
-        if (cartItems && cartItems.length > 0) {
-            cartItems.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${item.productName} - Size: ${item.size}, Color: ${item.color}`;
-                cartList.appendChild(listItem);
+        // Function to display cart items
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.forEach((item, index) => {
+                const cartItemElement = document.createElement('div');
+                cartItemElement.className = 'cart-item';
+                cartItemElement.innerHTML = `
+                    <h2>${item.productName} - ${item.size} - ${item.color}</h2>
+                    <button onclick="removeItem(${index})">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItemElement);
             });
-        } else {
-            // If no items in cart, display a message
-            const listItem = document.createElement('li');
-            listItem.textContent = 'Your cart is empty.';
-            cartList.appendChild(listItem);
         }
+
+        // Function to clear the entire cart
+        function clearCart() {
+            localStorage.removeItem('cartItems');
+            displayCartItems();
+        }
+
+        // Function to remove a single item from the cart
+        function removeItem(index) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            displayCartItems();
+        }
+
+        // Initial call to display cart items when the page loads
+        displayCartItems();
     </script>
 
 </body>

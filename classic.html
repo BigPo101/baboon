@@ -10,7 +10,6 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            position: relative; /* Added for positioning */
         }
         .container {
             width: 80%;
@@ -27,7 +26,7 @@
             text-align: center;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Adjusted for button positioning */
+            justify-content: center;
             position: fixed; /* Fixed position for header */
             width: 100%; /* Full width */
             top: 0; /* Fixed to the top */
@@ -38,17 +37,11 @@
             height: auto;
             margin-right: 10px;
         }
-        .cart-button {
-            padding: 0.5em 1em;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
+        .cart-icon {
+            position: absolute; /* Positioned absolute for top-right alignment */
+            top: 15px;
+            right: 15px;
             cursor: pointer;
-            margin-right: 1em; /* Added margin for spacing */
-        }
-        .cart-button:hover {
-            background-color: #0056b3;
         }
         .tshirt-details {
             background-color: #fff;
@@ -113,9 +106,9 @@
 <body>
 
     <header>
-        <a href="cart.html" class="cart-button">Cart</a>
         <img src="logo.png" alt="Logo">
         <h1>Customize Classic T-Shirt</h1>
+        <a href="cart.html"><img src="cart-icon.png" alt="Cart" class="cart-icon"></a>
     </header>
 
     <div class="container">
