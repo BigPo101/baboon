@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classic T-Shirt</title>
+    <title>baboon | Classic</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -106,9 +106,9 @@
 <body>
 
     <header>
-        <img src="logo.png" alt="Logo">
+        <img src="images/logo.png" alt="Logo">
         <h1>Customize Classic T-Shirt</h1>
-        <a href="cart.html"><img src="cart-icon.png" alt="Cart" class="cart-icon"></a>
+        <a href="cart.html"><img src="images/cart-icon.png" alt="Cart" class="cart-icon"></a>
     </header>
 
     <div class="container">
@@ -116,8 +116,8 @@
         <div class="tshirt-details">
             <h2>Classic T-Shirt</h2>
             <div class="images-container">
-                <img src="baboonsimple-front.pdf" alt="Classic T-Shirt Front">
-                <img src="baboonsimple-back.pdf" alt="Classic T-Shirt Back">
+                <img src="images/baboonsimple-front.pdf" alt="Classic T-Shirt Front">
+                <img src="images/baboonsimple-back.pdf" alt="Classic T-Shirt Back">
             </div>
             <div class="options">
                 <label for="size">Choose your size:</label>
@@ -134,7 +134,8 @@
                     <option value="blue">Blue</option>
                     <option value="red">Red</option>
                 </select>
-                <button onclick="addToCart('Classic T-Shirt')">Add to Cart</button>
+                <button onclick="addToCart('Classic T-Shirt', 'M', 'Red', 'images/classic-tshirt.jpg')">Add to Cart</button>
+
             </div>
         </div>
 
@@ -145,28 +146,18 @@
     </footer>
 
     <script>
-        function addToCart(productName) {
-            const size = document.getElementById('size').value;
-            const color = document.getElementById('color').value;
-            
-            // Create an object for the cart item
-            const item = {
-                productName: productName,
-                size: size,
-                color: color
+        function addToCart(productName, size, color, imageUrl) {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const newItem = {
+                productName,
+                size,
+                color,
+                imageUrl
             };
-
-            // Get existing cart items from localStorage or initialize an empty array
-            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-            // Add the new item to the cartItems array
-            cartItems.push(item);
-
-            // Store the updated cartItems array in localStorage
+            cartItems.push(newItem);
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-            // Redirect to the cart page
-            window.location.href = 'cart.html';
+            console.log('Added to cart:', newItem); // Debugging statement
+            alert('Item added to cart');
         }
     </script>
 

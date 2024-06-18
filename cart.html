@@ -39,7 +39,7 @@
             top: 15px;
             right: 15px;
             cursor: pointer;
-            width: 100px; /* Adjust the width as needed */
+            width: 30px; /* Adjust the width as needed */
             height: auto; /* Maintain aspect ratio */
         }
         .cart-item {
@@ -52,8 +52,14 @@
             justify-content: space-between;
             align-items: center;
         }
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            margin-right: 1em;
+        }
         .cart-item h2 {
             margin: 0;
+            flex-grow: 1;
         }
         .cart-item button {
             padding: 0.5em 1em;
@@ -92,9 +98,9 @@
 <body>
 
     <header>
-        <img src="logo.png" alt="Logo">
+        <a href="index.html"><img src="images/cart-icon.png" alt="Cart" class="cart-icon"></a>
+        <img src="images/logo.png" alt="Logo">
         <h1>Your Cart</h1>
-        <a href="index.html"><img src="cart-icon.png" alt="Cart" class="cart-icon"></a>
     </header>
 
     <div class="container">
@@ -114,10 +120,13 @@
             const cartItemsContainer = document.getElementById('cart-items');
             cartItemsContainer.innerHTML = '';
             const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            console.log('Cart Items:', cartItems); // Debugging statement
             cartItems.forEach((item, index) => {
+                console.log('Cart Item:', item); // Debugging statement
                 const cartItemElement = document.createElement('div');
                 cartItemElement.className = 'cart-item';
                 cartItemElement.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.productName}">
                     <h2>${item.productName} - ${item.size} - ${item.color}</h2>
                     <button onclick="removeItem(${index})">Remove</button>
                 `;
