@@ -17,29 +17,26 @@
             padding: 7em 0 2em 0; /* Adjusted padding to account for the fixed header */
         }
         header {
-            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent black */
+            background-color: rgb(0, 132, 255); /* Semi-transparent black */
             color: #fff;
             padding: 1em 0;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: fixed; /* Fixed position for header */
-            width: 100%; /* Full width */
-            top: 0; /* Fixed to the top */
-            z-index: 1000; /* Ensure header is on top of other content */
         }
+        
         header img {
-            width: 100px;
+            width: 15%; /* Adjust this value to make the logo larger */
             height: auto;
-            margin-right: 10px;
+            margin-bottom: 10px;
         }
         .cart-icon {
             position: absolute; /* Positioned absolute for top-right alignment */
             top: 15px;
             right: 15px;
             cursor: pointer;
-            width: 30px; /* Adjust the width as needed */
+            width: 5%; /* Adjust the width as needed */
             height: auto; /* Maintain aspect ratio */
         }
         .cart-item {
@@ -115,6 +112,20 @@
     </footer>
 
     <script>
+        // Function to get image URL based on color
+        function getImageUrl(color) {
+            switch(color) {
+                case 'Blue':
+                    return 'images/baboonsimple-front-blue.pdf';
+                case 'Black':
+                    return 'images/baboonface-front.pdf';
+                case 'White':
+                    return 'images/baboonsimple-front.pdf'
+                default:
+                    return 'images/baboonsimple-front.pdf';
+            }
+        }
+
         // Function to display cart items
         function displayCartItems() {
             const cartItemsContainer = document.getElementById('cart-items');
@@ -123,10 +134,11 @@
             console.log('Cart Items:', cartItems); // Debugging statement
             cartItems.forEach((item, index) => {
                 console.log('Cart Item:', item); // Debugging statement
+                const imageUrl = getImageUrl(item.color);
                 const cartItemElement = document.createElement('div');
                 cartItemElement.className = 'cart-item';
                 cartItemElement.innerHTML = `
-                    <img src="${item.imageUrl}" alt="${item.productName}">
+                    <img src="${imageUrl}" alt="${item.productName}">
                     <h2>${item.productName} - ${item.size} - ${item.color}</h2>
                     <button onclick="removeItem(${index})">Remove</button>
                 `;

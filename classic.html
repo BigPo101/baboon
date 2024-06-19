@@ -20,20 +20,16 @@
             align-items: center;
         }
         header {
-            background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent black */
+            background-color: rgb(0, 132, 255); /* Semi-transparent black */
             color: #fff;
             padding: 1em 0;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: fixed; /* Fixed position for header */
-            width: 100%; /* Full width */
-            top: 0; /* Fixed to the top */
-            z-index: 1000; /* Ensure header is on top of other content */
         }
         header img {
-            width: 100px;
+            width: 15%; /* Adjust this value to make the logo larger */
             height: auto;
             margin-right: 10px;
         }
@@ -42,6 +38,8 @@
             top: 15px;
             right: 15px;
             cursor: pointer;
+            width: 5%; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
         }
         .tshirt-details {
             background-color: #fff;
@@ -107,7 +105,7 @@
 
     <header>
         <img src="images/logo.png" alt="Logo">
-        <h1>Customize Classic T-Shirt</h1>
+        <h1>Customize</h1>
         <a href="cart.html"><img src="images/cart-icon.png" alt="Cart" class="cart-icon"></a>
     </header>
 
@@ -116,27 +114,27 @@
         <div class="tshirt-details">
             <h2>Classic T-Shirt</h2>
             <div class="images-container">
-                <img src="images/baboonsimple-front.pdf" alt="Classic T-Shirt Front">
-                <img src="images/baboonsimple-back.pdf" alt="Classic T-Shirt Back">
+                <img src="images/baboonsimple-front.pdf" alt="Classic T-Shirt Front" id="product-image1">
+                <img src="images/baboonsimple-back.pdf" alt="Classic T-Shirt Back" id="product-image2">
             </div>
-            <div class="options">
-                <label for="size">Choose your size:</label>
+            <form id="product-form">
+                <label for="size">Size:</label>
                 <select id="size" name="size">
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                    <option value="xl">XL</option>
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">Extra Large</option>
                 </select>
-                <label for="color">Choose your color:</label>
-                <select id="color" name="color">
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                    <option value="blue">Blue</option>
-                    <option value="red">Red</option>
+                
+                <label for="color">Color:</label>
+                <select id="color" name="color" onchange="updateProductImages()">
+                    <option value="White">White</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Black">Black</option>
                 </select>
-                <button onclick="addToCart('Classic T-Shirt', 'M', 'Red', 'images/classic-tshirt.jpg')">Add to Cart</button>
-
-            </div>
+                
+                <button type="button" onclick="addToCart('Classic T-Shirt')">Add to Cart</button>
+            </form>
         </div>
 
     </div>
@@ -146,6 +144,26 @@
     </footer>
 
     <script>
+        function updateProductImages() {
+            const color = document.getElementById('color').value;
+            const productImage1 = document.getElementById('product-image1');
+            const productImage2 = document.getElementById('product-image2');
+
+            switch(color) {
+                case 'Blue':
+                    productImage1.src = 'images/baboonsimple-front-blue.pdf';
+                    productImage2.src = 'images/baboonsimple-back-blue.pdf'; // Assuming you have a back view image for red
+                    break;
+                case 'Black':
+                    productImage1.src = 'images/classic-tshirt-black.jpg';
+                    productImage2.src = 'images/classic-tshirt-black-back.jpg'; // Assuming you have a back view image for black
+                    break;
+                default:
+                    productImage1.src = 'images/classic-tshirt.jpg';
+                    productImage2.src = 'images/classic-tshirt.jpg';
+            }
+        }
+
             function addToCart(productName, size, color, imageUrl) {
         const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         const newItem = {
