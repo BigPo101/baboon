@@ -130,7 +130,7 @@
                 <select id="color" name="color" onchange="updateProductImages()">
                     <option value="White">White</option>
                     <option value="Blue">Blue</option>
-                    <option value="Black">Black</option>
+                    <option value="Grey">Grey</option>
                 </select>
                 
                 <button type="button" onclick="addToCart('Classic T-Shirt')">Add to Cart</button>
@@ -152,9 +152,13 @@
                     productImage1.src = 'images/baboonsimple-front-blue.png';
                     productImage2.src = 'images/baboonsimple-back-blue.png'; // Assuming you have a back view image for red
                     break;
-                case 'Black':
-                    productImage1.src = 'images/classic-tshirt-black.jpg';
-                    productImage2.src = 'images/classic-tshirt-black-back.jpg'; // Assuming you have a back view image for black
+                case 'Grey':
+                    productImage1.src = 'images/baboonsimple-front-grey-1.png';
+                    productImage2.src = 'images/baboonsimple-back-grey-1.png'; // Assuming you have a back view image for black
+                    break;
+                case 'White':
+                    productImage1.src = 'images/baboonsimple-front.png';
+                    productImage2.src = 'images/baboonsimple-back.png';
                     break;
                 default:
                     productImage1.src = 'images/classic-tshirt.jpg';
