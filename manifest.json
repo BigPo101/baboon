@@ -1,7 +1,7 @@
 {
     "name": "baboon",
     "short_name": "baboon",
-    "start_url": "baboon-vercel.app",
+    "start_url": "https://baboon-vercel.app",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
